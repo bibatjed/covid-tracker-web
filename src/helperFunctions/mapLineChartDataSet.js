@@ -12,10 +12,15 @@ function colorChartPicker(labels) {
 }
 
 export default function (lineChartDataSet) {
-  const labels = Object.keys(lineChartDataSet.data);
+  //refactor thiiiiiis
+  const labels = Object.keys(
+    lineChartDataSet?.data?.timeline || lineChartDataSet.data
+  );
 
   const DataSets = labels.map((labelsValue) => {
-    const current = lineChartDataSet.data[labelsValue];
+    const current =
+      lineChartDataSet?.data?.timeline?.[labelsValue] ||
+      lineChartDataSet.data[labelsValue];
     const dataSets = Object.entries(current).map(([key, value]) => ({
       t: moment(key).format("YYYY-MM-DD"),
       y: value,
@@ -29,7 +34,9 @@ export default function (lineChartDataSet) {
   });
 
   return {
-    labels: Object.keys(lineChartDataSet.data.cases),
+    labels: Object.keys(
+      lineChartDataSet?.data?.timeline?.cases || lineChartDataSet.data.cases
+    ),
     datasets: DataSets,
   };
 }

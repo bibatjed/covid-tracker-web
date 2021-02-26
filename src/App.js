@@ -35,16 +35,18 @@ function App() {
   }, []);
 
   useEffect(() => {
-    async function fetchLineChartData() {
-      const lineChartResult = await APIClass.getCovidHistorical();
+    async function fetchLineChartData(selectedCountry) {
+      const lineChartResult = await APIClass.getCovidHistorical(
+        selectedCountry
+      );
 
       const chartDataSets = mapLineChartDataSet(lineChartResult);
 
       setDataSets(chartDataSets);
     }
 
-    fetchLineChartData();
-  }, []);
+    fetchLineChartData(selectedCountry);
+  }, [selectedCountry]);
 
   const handleChange = (event) => {
     setSelectedCountry(event.target.value);
