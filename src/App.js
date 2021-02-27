@@ -21,7 +21,7 @@ import {
 
 function App() {
   const [maps, setMaps] = useState([]);
-  const [dataSets, setDataSets] = useState();
+  const [dataSets, setDataSets] = useState({ labels: "", datasets: [] });
 
   const [selectedCountry, setSelectedCountry] = useState("Global");
 
@@ -36,13 +36,17 @@ function App() {
 
   useEffect(() => {
     async function fetchLineChartData(selectedCountry) {
-      const lineChartResult = await APIClass.getCovidHistorical(
-        selectedCountry
-      );
+      try {
+        const lineChartResult = await APIClass.getCovidHistorical(
+          selectedCountry
+        );
 
-      const chartDataSets = mapLineChartDataSet(lineChartResult);
+        const chartDataSets = mapLineChartDataSet(lineChartResult);
 
-      setDataSets(chartDataSets);
+        setDataSets(chartDataSets);
+      } catch (e) {
+        setDataSets({ labels: "", datasets: [] });
+      }
     }
 
     fetchLineChartData(selectedCountry);

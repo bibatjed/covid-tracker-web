@@ -15,16 +15,28 @@ export default function Map(props) {
         noWrap={false}
       />
 
-      {props?.maps?.map((map) => {
+      {props?.maps?.map((map, index) => {
         return (
-          <Marker position={[map.countryInfo.lat, map.countryInfo.long]}>
-            <Popup>
-              <span style={{ display: "block" }}>Country: {map.country}</span>
-              <span style={{ display: "block" }}>Cases: {map.cases}</span>
-              <span style={{ display: "block" }}>
+          <Marker
+            key={`${index}${map.countryInfo.lat}${map.countryInfo.long}`}
+            position={[map.countryInfo.lat, map.countryInfo.long]}
+          >
+            <Popup key={index}>
+              <span key={`${index}${map.country}`} style={{ display: "block" }}>
+                Country: {map.country}
+              </span>
+              <span key={`${index}${map.cases}`} style={{ display: "block" }}>
+                Cases: {map.cases}
+              </span>
+              <span
+                key={`${index}${map.recovered}`}
+                style={{ display: "block" }}
+              >
                 Recovered: {map.recovered}
               </span>
-              <span style={{ display: "block" }}>Deaths: {map.deaths}</span>
+              <span key={`${index}${map.deaths}`} style={{ display: "block" }}>
+                Deaths: {map.deaths}
+              </span>
             </Popup>
           </Marker>
         );

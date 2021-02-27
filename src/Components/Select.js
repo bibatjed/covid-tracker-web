@@ -9,9 +9,11 @@ export default function (props) {
       value={props.value}
       onChange={(e) => props.onChange(e)}
     >
-      {props.selectItems.map((selectItemsValue) => {
+      {props.selectItems.map((selectItemsValue, index) => {
         return (
-          <MenuItem value={selectItemsValue}> {selectItemsValue}</MenuItem>
+          <MenuItem key={index} value={selectItemsValue}>
+            {selectItemsValue}
+          </MenuItem>
         );
       })}
     </Select>

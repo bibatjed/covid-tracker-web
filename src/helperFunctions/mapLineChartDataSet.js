@@ -11,7 +11,7 @@ function colorChartPicker(labels) {
   }
 }
 
-export default function (lineChartDataSet) {
+export default function mapLineChart(lineChartDataSet) {
   //refactor thiiiiiis
   const labels = Object.keys(
     lineChartDataSet?.data?.timeline || lineChartDataSet.data
